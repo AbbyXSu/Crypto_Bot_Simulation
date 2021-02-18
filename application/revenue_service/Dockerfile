@@ -8,6 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 5002
+EXPOSE 5001
 
-CMD ["python", "expenditure_service.py"]
+CMD ["python", "revenue_service.py"]
