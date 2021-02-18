@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+
+  # Proxies requests to internal services
+  reverse-proxy:
+    image: nginx:1.17.10
+    container_name: nginx_reverse_proxy
+    depends_on:
+        - generator
+        - coinClass
+        - coinValue
+    volumes:
+      - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+
+  # generates reports
+  generator:
+    image: generator
+    container_name: generator
+    build:
+      context: ./generator
+    depends_on:
+        - coinClass
+        - coinValue
+    ports:
+      - 8080:80
+    restart: on-failure
+
+
+  # Retrieves the coinValue
+  coinValue:
+    image: coinValue
+    container_name: coinValue
+    build:
+      context: ./coinValue
+    ports:
+      - 5001:5001
+    restart: on-failure
+
+
+  # Generates a coinClass
+  coinClass:
+    image: coinClass
+    container_name: coinClass
+    build:
+      context: ./coinClass
+    ports:
+      - 5002:5002
+    restart: on-failure
