@@ -7,7 +7,7 @@ services:
     image: nginx:1.17.10
     container_name: nginx_reverse_proxy
     depends_on:
-        - report
+        - report_ui
         - report_engine
         - revenue_service
         - expenditure_service
@@ -89,5 +89,17 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} 
             app_version: ${app_version}
+    deploy:
+      replicas: 3
+
+# pass to the frontend
+report_ui:
+    image: report_ui
+    container_name:report_ui
+    build:
+      context: ./report_ui
+    ports:
+      - 5000:5000
+    restart: on-failure
     deploy:
       replicas: 3

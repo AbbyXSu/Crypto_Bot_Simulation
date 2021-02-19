@@ -18,11 +18,11 @@ def get_performance():
 
     type = "Break Even"
 
-    P_or_L = revenue - expense
+    income = revenue - expense
 
-    is_loss = P_or_L < 0
-    is_profits = P_or_L > 0
-    is_breakeven = P_or_L = 0
+    is_loss = income < 0
+    is_profits = income > 0
+    is_breakeven = income = 0
 
     if is_loss:
         print('loss detected')
@@ -30,7 +30,7 @@ def get_performance():
 
     if is_profits:
         print('profit detected')
-        precip_type = "profit"
+        type = "profit"
     
     if is_breakeven:
         print('Break-even')
@@ -39,7 +39,7 @@ def get_performance():
     efficiency_ratio = round(revenue (expense / revenue) * 100)
 
     return  jsonify ({
-        'P/L': P_or_L,
+        'income': income,
         'Efficiency_ratio': efficiency_ratio,
         'type': type
     })

@@ -1,0 +1,19 @@
+<h1>Your Financial Report</h1>
+
+<h2>Refresh page to simulate your Financial Performance</h2>
+
+<p>
+    {% for i in latestItem %}
+    The latest revenue is £{{ revenue }} and the expense is £{{ expense }}, you have make a {{ type }} of £{{ income }} with cost efficiency of {{efficiency_ratio}}%
+    <br>
+    {% endfor %}
+</p>
+
+<h3>Historical Financial Performance </h3>
+
+<p>
+    {% for i in reports %}
+    The revenue is £{{ revenue }} and the expense is £{{ expense }}, you have make a {{ type }} of £{{ income }} with cost efficiency of {{efficiency_ratio}}%
+    <br>
+    {% endfor %}
+</p>
