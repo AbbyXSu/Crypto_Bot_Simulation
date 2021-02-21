@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.8-alpine
 
 WORKDIR /app
 
@@ -8,6 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-EXPOSE 5003
+EXPOSE 5004
 
-CMD ["python", "report_generator.py"]
+CMD ["python", "app.py"]

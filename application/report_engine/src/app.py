@@ -9,9 +9,9 @@ from flask import Response
 def get_reports():  
     revenue = requests.get("http://revenue_service:5001/revenue")
     expense = requests.get("http://expenditure_service:5002/expense")
-    type,income, efficiency_ratio = requests.post("http://report_aggregate_service:5003/report_generator", json={'revenue':revenue.text, 'expense':expense.text})
+    PLtype,income, efficiency_ratio = requests.post("http://report_aggregate_service:5003/report_generator", json={'revenue':revenue.text, 'expense':expense.text})
     
-    report = Reports(revenue=revenue.text, income=income.text, efficiency_ratio=efficiency_ratio.text, type=type.text)
+    report = Reports(revenue=revenue.text, income=income.text, efficiency_ratio=efficiency_ratio.text, PLtype=type.text)
     
     db.session.add(report)
     db.session.commit()

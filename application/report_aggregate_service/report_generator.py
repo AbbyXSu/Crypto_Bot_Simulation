@@ -16,7 +16,7 @@ def get_performance():
     if not expense:
         expense = -500
 
-    type = "Break Even"
+    PLLtype = "Break Even"
 
     income = revenue - expense
 
@@ -26,22 +26,22 @@ def get_performance():
 
     if is_loss:
         print('loss detected')
-        type = "Loss"
+        PLtype = "Loss"
 
     if is_profits:
         print('profit detected')
-        type = "profit"
+        PLtype = "profit"
     
     if is_breakeven:
         print('Break-even')
-        type = "Break-even"
+        PLtype = "Break-even"
 
     efficiency_ratio = round(revenue (expense / revenue) * 100)
 
     return  jsonify ({
         'income': income,
         'Efficiency_ratio': efficiency_ratio,
-        'type': type
+        'PLtype': PLtype
     })
 
 

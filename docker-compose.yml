@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
 
@@ -13,34 +13,18 @@ services:
         - expenditure_service
         - report_aggregate_service
     volumes:
-      - ./reverse_proxy/nginx.conf:/etc/nginx/nginx.conf
+      - type: bind
+        source: ./reverse_proxy/nginx.conf
+        target: /etc/nginx/nginx.conf
     ports:
       - 80:80
-
-  # report
-  report:
-    image: report
-    container_name: report
-    build:
-      context: ./report
-    depends_on:
-        - report_engine
-        - report_aggregate_service
-        - revenue_service
-        - expenditure_service
-    ports:
-      - 8080:80
-    restart: on-failure
-    deploy:
-      replicas: 3
-
 
   # Retrieves the revenue
   revenue_service:
     image: revenue_service
     container_name: revenue_service
     build:
-      context: ./revenue_service
+      context: ./application/revenue_service
     ports:
       - 5001:5001
     restart: on-failure
@@ -52,7 +36,7 @@ services:
     image: expenditure_service
     container_name: expenditure_service
     build:
-      context: ./expenditure_service
+      context: ./application/expenditure_service
     ports:
       - 5002:5002
     restart: on-failure
@@ -64,7 +48,7 @@ services:
     image: report_aggregate_service
     container_name: report_aggregate_service
     build:
-      context: ./report_aggregate_service
+      context: ./application/report_aggregate_service
     ports:
       - 5003:5003
     restart: on-failure
@@ -77,29 +61,43 @@ services:
     image: report_engine
     container_name: report_engine
     build:
-      context: ./report_engine
+      context: ./application/report_engine/src
     ports:
       - 5004:5004
+    depends_on: 
+      - MySQL
+    environment: 
+      - DATABASE_URI=mysql+pymysql://root:{DB_PASSWORD}@MySQLDB/db
+      - SECRET_KEY=${SECRET_KEY}
     restart: on-failure
     deploy:
       replicas: 3
 
-  database:
-    image: database
+  MySQL:
+    image: mysql
+    container_name: mysql
+    build:
+      context: ./db
+    ports:
+      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} 
-            app_version: ${app_version}
-    deploy:
-      replicas: 3
+    volumes:
+      - type: volumes
+        source: db_reports
+        target: /var/lib/mysql
 
 # pass to the frontend
-report_ui:
+  report_ui:
     image: report_ui
-    container_name:report_ui
+    container_name: report_ui
     build:
-      context: ./report_ui
+      context: ./application/report_ui
     ports:
       - 5000:5000
     restart: on-failure
     deploy:
       replicas: 3
+
+volumes: 
+  db_reports:
