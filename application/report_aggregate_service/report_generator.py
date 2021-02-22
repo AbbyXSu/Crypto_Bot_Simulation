@@ -25,7 +25,7 @@ def get_performance():
 
     is_loss = income < 0
     is_profits = income > 0
-    is_breakeven = income = 0
+    is_breakeven = income == 0
 
     if is_loss:
         print('loss detected')
@@ -45,13 +45,13 @@ def get_performance():
 
     
     if expense != 0:
-        efficiency_ratio = round((income/expense) * 100)
+        efficiency_ratio = round(abs(((income/expense) * 100)))
     else:
         efficiency_ratio =100
 
     return  jsonify ({
         'income': income,
-        'Efficiency_ratio': efficiency_ratio,
+        'efficiency_ratio': efficiency_ratio,
         'PLtype': PLtype
     })
 

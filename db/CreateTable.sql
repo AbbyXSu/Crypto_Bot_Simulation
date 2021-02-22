@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Reports
+CREATE TABLE IF NOT EXISTS reports
     (
             id INTEGER NOT NULL AUTO_INCREMENT,
             revenue VARCHAR(30) NOT NULL,
@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS Reports
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-LOCK TABLES `Reports` WRITE;
-/*!40000 ALTER TABLE `Reports` DISABLE KEYS */;
-INSERT INTO `Reports` VALUES (1,'500','500','breakeven','0','0');
-/*!40000 ALTER TABLE `Reports` ENABLE KEYS */;
+LOCK TABLES `reports` WRITE;
+/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+INSERT INTO `reports` VALUES (1,'500','-500','breakeven','0','0');
+/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
 UNLOCK TABLES;
