@@ -6,15 +6,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import getenv
+import os
+
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
-
-app.config["SQLALCHEMY_DATABASE_URI"] =  getenv("DATABASE_URI")
+app.config['SECRET_KEY'] = '88dd6a6854b7f1901b7f01d353186c6a'
+app.config["SQLALCHEMY_DATABASE_URI"] =os.getenv('DATABASE_URI')
     # environment: 
-    #   - DATABASE_URI=mysql+pymysql://root:${DB_PASSWORD}@mysql:3306/MySQLDB
+    #   - DATABASE_URI=mysql+pymysql://root:${DB_PASSWORD}@mysql/MySQLDB
     #   - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} 
+print('db uri: ', os.getenv('DATABASE_URI'))
+db = SQLAlchemy(app)
 
 class Reports(db.Model):
     id = db.Column(db.Integer, primary_key=True)

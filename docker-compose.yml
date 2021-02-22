@@ -5,7 +5,6 @@ services:
   # Proxies requests to internal services
   reverse-proxy:
     image: nginx:1.17.10
-    container_name: nginx_reverse_proxy
     depends_on:
         - report_ui
         - report_engine
@@ -22,11 +21,12 @@ services:
 
   mysql:
     image: abbysu/db:latest
-    container_name: mysql
     build: ./db/
     environment:
       user: root
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} 
+    ports:
+      - 33061:3306
     volumes:
       - type: volume
         source: db_reports
@@ -35,66 +35,63 @@ services:
   # Retrieves the revenue
   revenue_service:
     image: revenue_service
-    container_name: revenue_service
     build:
       context: ./application/revenue_service
     ports:
       - 5001:5001
     restart: on-failure
-    deploy:
-      replicas: 3
+    # deploy:
+    #   replicas: 3
 
   # Retrieves the expense
   expenditure_service:
     image: expenditure_service
-    container_name: expenditure_service
     build:
       context: ./application/expenditure_service
     ports:
       - 5002:5002
     restart: on-failure
-    deploy:
-      replicas: 3
+    # deploy:
+    #   replicas: 3
 
   # Generates a report_aggregate_service
   report_aggregate_service:
     image: report_aggregate_service
-    container_name: report_aggregate_service
     build:
       context: ./application/report_aggregate_service
     ports:
       - 5003:5003
     restart: on-failure
-    deploy:
-      replicas: 3
+    # deploy:
+    #   replicas: 3
 
 
 # process the engine
   report_engine:
     image: report_engine
-    container_name: report_engine
     build:
       context: ./application/report_engine/src
     ports:
       - 5004:5004
     depends_on: 
       - mysql
+    environment:
+      DATABASE_URI: mysql+pymysql://root:password@mysql/MySQLDB
     restart: on-failure
-    deploy:
-      replicas: 3
+    # deploy:
+    #   replicas: 3
 
 
 # pass to the frontend
   report_ui:
     image: report_ui
-    container_name: report_ui
     build:
       context: ./application/report_ui
     ports:
       - 5000:5000
     restart: on-failure
-    deploy:
-      replicas: 3
+    # deploy:
+    #   replicas: 3
 
 volumes: 
   db_reports:
