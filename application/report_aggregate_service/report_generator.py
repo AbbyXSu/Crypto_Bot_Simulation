@@ -1,24 +1,27 @@
 import random
-from flask import Flask, request,  jsonify
+from flask import Flask, request,  jsonify,abort
+from requests.models import Response
 
 app = Flask(__name__)
 
 @app.route('/report_generator', methods=['POST'])
 def get_performance():
+    if not request.json:
+        abort(400,"Request nor found")
+    revenue = int(request.json.get('revenue',  '0'))
+    expense = int(request.json.get('expense', '0'))
 
-    revenue = int(request.args.get('revenue'))
-    expense = int(request.args.get('expense'))
-
+    print (request.json)
 
     if not revenue:
-        renenue = 500
+        revenue = 500
 
     if not expense:
         expense = -500
 
-    PLLtype = "Break Even"
+    PLtype = "Break Even"
 
-    income = revenue - expense
+    income = revenue + expense
 
     is_loss = income < 0
     is_profits = income > 0
@@ -36,7 +39,15 @@ def get_performance():
         print('Break-even')
         PLtype = "Break-even"
 
-    efficiency_ratio = round(revenue (expense / revenue) * 100)
+    print (expense)
+    print(revenue)
+    print(income)
+
+    
+    if expense != 0:
+        efficiency_ratio = round((income/expense) * 100)
+    else:
+        efficiency_ratio =100
 
     return  jsonify ({
         'income': income,

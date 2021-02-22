@@ -19,6 +19,20 @@ services:
     ports:
       - 80:80
 
+
+  mysql:
+    image: abbysu/db:latest
+    container_name: mysql
+    build: ./db
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} 
+    volumes:
+      - type: volumes
+        source: db_reports
+        target: /var/lib/mysql
+
   # Retrieves the revenue
   revenue_service:
     image: revenue_service
@@ -65,27 +79,14 @@ services:
     ports:
       - 5004:5004
     depends_on: 
-      - MySQL
-    environment: 
-      - DATABASE_URI=mysql+pymysql://root:{DB_PASSWORD}@MySQLDB/db
-      - SECRET_KEY=${SECRET_KEY}
+      - mysql
+    # environment: 
+    #   - DATABASE_URI=mysql+pymysql://root:${DB_PASSWORD}@mysql:3306/MySQLDB
+    #   - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} 
     restart: on-failure
     deploy:
       replicas: 3
 
-  MySQL:
-    image: mysql
-    container_name: mysql
-    build:
-      context: ./db
-    ports:
-      - 3306:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} 
-    volumes:
-      - type: volumes
-        source: db_reports
-        target: /var/lib/mysql
 
 # pass to the frontend
   report_ui:

@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 5003
 
-CMD ["python", "report_generator.py"]
+CMD ["python","-u", "report_generator.py"]
