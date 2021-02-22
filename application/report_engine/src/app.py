@@ -12,7 +12,9 @@ app = Flask(__name__)
 db = SQLAlchemy(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] =  getenv("DATABASE_URI")
-
+    # environment: 
+    #   - DATABASE_URI=mysql+pymysql://root:${DB_PASSWORD}@mysql:3306/MySQLDB
+    #   - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} 
 
 class Reports(db.Model):
     id = db.Column(db.Integer, primary_key=True)
