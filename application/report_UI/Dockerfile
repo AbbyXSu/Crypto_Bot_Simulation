@@ -1,6 +1,15 @@
-FROM nginx:latest
+FROM python:3.8-alpine
 
 WORKDIR /app
 
+COPY requirements.txt .
 
-COPY nginx.conf /etc/nginx/nginx.conf
+RUN pip install -r requirements.txt
+
+COPY . .
+
+EXPOSE 5004
+
+CMD ["python","app.py"]
+
+
