@@ -45,7 +45,7 @@ def get_performance():
 
     
     if expense != 0:
-        efficiency_ratio = round(abs(((income/expense) * 100)))
+        efficiency_ratio = round(((income/abs(expense)) * 100))
     else:
         efficiency_ratio =100
 
