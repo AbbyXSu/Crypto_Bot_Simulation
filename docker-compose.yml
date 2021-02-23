@@ -1,24 +1,6 @@
 version: '3.8'
 
 services:
-
-  # Proxies requests to internal services
-  reverse-proxy:
-    image: nginx:1.17.10
-    depends_on:
-        - report_ui
-        - report_engine
-        - revenue_service
-        - expenditure_service
-        - report_aggregate_service
-    volumes:
-      - type: bind
-        source: ./reverse_proxy/nginx.conf
-        target: /etc/nginx/nginx.conf
-    ports:
-      - 80:80
-
-
   mysql:
     image: abbysu/db:latest
     build: ./db/
