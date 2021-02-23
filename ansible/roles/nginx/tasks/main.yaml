@@ -1,0 +1,21 @@
+- name: 'download and install git & nginx using apt'
+  apt:
+    pkg:
+    - nginx
+    - git
+    state: latest
+    update_cache: true
+- name: 'make sure that the nginx service is started'
+  service:
+    name: nginx
+    state: started
+- name: 'install the nginx.conf file on to the remote machine'
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+  register: nginx_config
+- name: 'reload nginx'
+  service:
+    name: nginx
+    state: reloaded
+  when: nginx_config.changed

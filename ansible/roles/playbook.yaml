@@ -1,0 +1,16 @@
+- hosts: manager
+  become:  true
+  roles:
+  - docker 
+  - swarm-init
+
+- hosts: workers
+  become: true
+  roles:
+  - docker 
+  - swarm-worker
+
+- hosts: nginx
+  become: true
+  roles:
+  - nginx
