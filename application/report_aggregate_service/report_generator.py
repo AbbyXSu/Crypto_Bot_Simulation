@@ -1,4 +1,3 @@
-import random
 from flask import Flask, request,  jsonify,abort
 from requests.models import Response
 
@@ -10,8 +9,6 @@ def get_performance():
         abort(400,"Request nor found")
     revenue = int(request.json.get('revenue',  '0'))
     expense = int(request.json.get('expense', '0'))
-
-    print (request.json)
 
     if not revenue:
         revenue = 500
@@ -38,11 +35,6 @@ def get_performance():
     if is_breakeven:
         print('Break-even')
         PLtype = "Break-even"
-
-    print (expense)
-    print(revenue)
-    print(income)
-
     
     if expense != 0:
         efficiency_ratio = round(((income/abs(expense)) * 100))
@@ -54,8 +46,6 @@ def get_performance():
         'efficiency_ratio': efficiency_ratio,
         'PLtype': PLtype
     })
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5003')
