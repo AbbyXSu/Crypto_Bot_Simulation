@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/report_generator', methods=['POST'])
 def get_performance():
     if not request.json:
-        abort(400,"Request nor found")
+        abort(400,"Invalid Request")
     revenue = int(request.json.get('revenue',  '0'))
     expense = int(request.json.get('expense', '0'))
 

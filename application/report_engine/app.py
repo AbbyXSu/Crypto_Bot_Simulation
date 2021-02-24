@@ -12,10 +12,7 @@ from sqlalchemy.ext.declarative import DeclarativeMeta
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '88dd6a6854b7f1901b7f01d353186c6a'
 app.config['SQLALCHEMY_DATABASE_URI'] =os.environ.get('DATABASE_URI')
-    # environment: 
-    #   - DATABASE_URI=mysql+pymysql://root:${DB_PASSWORD}@mysql/MySQLDB
-    #   - MYSQL_ROOT_PASSWORD=${DB_PASSWORD} 
-print('db uri: ', os.getenv('DATABASE_URI'))
+
 db = SQLAlchemy(app)
 
 class Reports(db.Model):
@@ -28,28 +25,6 @@ class Reports(db.Model):
 
 db.create_all()
 
-
-
-
-# class AlchemyEncoder(json.JSONEncoder):
-
-#     def default(self, obj):
-#         if isinstance(obj.__class__, DeclarativeMeta):
-#             # an SQLAlchemy class
-#             fields = {}
-#             for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata']:
-#                 data = obj.__getattribute__(field)
-#                 try:
-#                     json.dumps(data) # this will fail on non-encodable values, like other classes
-#                     fields[field] = data
-#                 except TypeError:
-#                     fields[field] = None
-#             # a json-encodable dict
-#             return fields
-#         print('***********')
-#         return json.JSONEncoder.default(self, obj)
-
-
 def row_dict(row):
     d = {}
     for column in row.__table__.columns:
@@ -61,7 +36,6 @@ def row_dict(row):
 @app.route('/report_engine',methods=["GET","POST"])
 def get_reports():  
     revenue = requests.get("http://revenue_service:5001/revenue").json().get('Revenue','0')
-    print(revenue)
     expense = requests.get("http://expenditure_service:5002/expense").json().get('Expense','0')
     result_raw = requests.post("http://report_aggregate_service:5003/report_generator", json={'revenue':revenue, 'expense':expense})
     if result_raw.status_code == 200 or result_raw.status_code == 201:

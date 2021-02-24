@@ -52,7 +52,7 @@ services:
   report_engine:
     image: report_engine
     build:
-      context: ./application/report_engine/src
+      context: ./application/report_engine
     ports:
       - 5004:5004
     depends_on: 
