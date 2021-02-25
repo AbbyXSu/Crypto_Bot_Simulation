@@ -1,4 +1,4 @@
-cd application/ expenditure_service/tests
+cd application/expenditure_service/tests
 pip3 install -r requirements.txt
 pip3 install pytest pytest-cov requests_mock
 python3 -m pytest --cov=application --cov-report xml 
