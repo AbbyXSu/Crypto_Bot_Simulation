@@ -19,8 +19,8 @@ services:
     image: ${AUTHOR}/revenue_service
     build:
       context: ./application/revenue_service
-    ports:
-      - 5001:5001
+    # ports:
+    #   - 5001:5001
     restart: on-failure
     deploy:
       replicas: 3
@@ -69,8 +69,8 @@ services:
     image: aso/report_ui
     build:
       context: ./application/report_ui
-    # ports:
-    #   - 5000:5000
+    ports:
+      - 5000:5000
     restart: on-failure
     deploy:
       replicas: 3
