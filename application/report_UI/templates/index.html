@@ -1,0 +1,40 @@
+<br>
+<h1>Your Financial Report</h1>
+
+<h3>Refresh page to simulate your Financial Performance</h3><br>
+<h2>Your Latest Financial Performance</h2>
+
+<p>
+    The latest revenue is £{{latestItem['revenue']}} and the expense is £{{ latestItem['expense']}}, you have make a {{ latestItem['PLtype'] }} of £{{ latestItem['income'] }} with cost efficiency of {{latestItem['efficiency_ratio']}}%
+    <br>
+</p>
+<br>
+
+<h2>Historical Financial Performance </h2>
+
+<table >
+      <tr>
+        <th>Revenue(£)</th> 
+        <th>Expense(£)</th>
+        <th>Income(£)</th> 
+        <th>Profit or Loss</th>
+        <th>Efficiency(%)- Returns per £100 investment/costs</th>
+      </tr>
+      {% for i in reports%}
+      <tr>
+        <td>{{ i['revenue'] }}</td>
+        <td>{{i['expense']}}</td>
+        <td>{{i['income']}}</td>
+        <td>{{i['PLtype']}}</td>
+        <td>{{i['efficiency_ratio']}}</td>
+      </tr>
+      {% endfor %}
+  </table>
+
+<p>
+    {% for i in reports %}
+    <br>
+    The revenue is £{{ i['revenue'] }} and the expense is £{{ i['expense'] }}, you have make a {{ i['PLtype'] }} of £{{ i['income'] }} with cost efficiency of {{i['efficiency_ratio']}}%
+    <br>
+    {% endfor %}
+</p>
