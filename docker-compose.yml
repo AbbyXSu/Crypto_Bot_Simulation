@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   mysql:
-    image: aso/db:latest
+    image: abbysu/db:latest
     build: ./db/
     environment:
       user: root
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} 
-    # ports:
-    #   - 33061:3306
+    ports:
+      - 33061:3306
     volumes:
       - type: volume
         source: db_reports
@@ -19,8 +19,6 @@ services:
     image: ${AUTHOR}/revenue_service
     build:
       context: ./application/revenue_service
-    # ports:
-    #   - 5001:5001
     restart: on-failure
     deploy:
       replicas: 3
@@ -30,8 +28,6 @@ services:
     image:  ${AUTHOR}/expenditure_service
     build:
       context: ./application/expenditure_service
-    # ports:
-    #   - 5002:5002
     restart: on-failure
     deploy:
       replicas: 3
@@ -41,8 +37,6 @@ services:
     image: ${AUTHOR}/report_aggregate_service
     build:
       context: ./application/report_aggregate_service
-    ports:
-      - 5003:5003
     restart: on-failure
     deploy:
       replicas: 3
@@ -53,12 +47,10 @@ services:
     image: ${AUTHOR}/report_engine
     build:
       context: ./application/report_engine
-    # ports:
-    #   - 5004:5004
     depends_on: 
       - mysql
     environment:
-      DATABASE_URI: mysql+pymysql://root:password@mysql/MySQLDB
+      DATABASE_URI: ${DATABASE_URI}
     restart: on-failure
     deploy:
       replicas: 3
@@ -66,7 +58,7 @@ services:
 
 # pass to the frontend
   report_ui:
-    image: aso/report_ui
+    image: ${AUTHOR}/report_ui
     build:
       context: ./application/report_ui
     ports:
