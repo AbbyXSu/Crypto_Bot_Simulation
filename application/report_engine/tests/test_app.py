@@ -36,19 +36,5 @@ class TestResponse(TestBase):
                 self.assertIn(response.json,500)
                 self.assertEqual(response.status_code, 200)
 
-    # def test_performance_loss(self):
-    #             items=dict(revenue='50',expense='-500')
-    #             response = self.client.post(url_for('get_performance'), json=items)
-                
-    #             self.assertEqual(response.json,dict(PLtype='Loss',efficiency_ratio=-90,income=-450))
-    #             self.assertEqual(response.status_code, 200)
-
-    # def test_performance_profit(self):
-    #             items=dict(revenue='500',expense='-50')
-    #             response = self.client.post(url_for('get_performance'), json=items)
-                
-    #             self.assertEqual(response.json,dict(PLtype='profit',efficiency_ratio=900,income=450))
-    #             self.assertEqual(response.status_code, 200)
-
 if __name__ == '__main__':
     unittest.main()

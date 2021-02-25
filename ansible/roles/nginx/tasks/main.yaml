@@ -9,7 +9,7 @@
   service:
     name: nginx
     state: started
-- name: 'install the nginx.conf file on to the remote machine'
+- name: 'copy the nginx.conf file on to the remote machine'
   template:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf

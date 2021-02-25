@@ -1,7 +1,7 @@
 events{}
 http{
     upstream application {
-        server 10.154.0.26:5000;
+        server 10.154.0.4:5000;
     }
     server {
         location / {

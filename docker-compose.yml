@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   mysql:
-    image: abbysu/db:latest
+    image: aso/db:latest
     build: ./db/
     environment:
       user: root
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} 
-    ports:
-      - 33061:3306
+    # ports:
+    #   - 33061:3306
     volumes:
       - type: volume
         source: db_reports
@@ -16,64 +16,64 @@ services:
 
   # Retrieves the revenue
   revenue_service:
-    image: revenue_service
+    image: ${AUTHOR}/revenue_service
     build:
       context: ./application/revenue_service
     ports:
       - 5001:5001
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 3
 
   # Retrieves the expense
   expenditure_service:
-    image: expenditure_service
+    image:  ${AUTHOR}/expenditure_service
     build:
       context: ./application/expenditure_service
-    ports:
-      - 5002:5002
+    # ports:
+    #   - 5002:5002
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 3
 
   # Generates a report_aggregate_service
   report_aggregate_service:
-    image: report_aggregate_service
+    image: ${AUTHOR}/report_aggregate_service
     build:
       context: ./application/report_aggregate_service
     ports:
       - 5003:5003
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 3
 
 
 # process the engine
   report_engine:
-    image: report_engine
+    image: ${AUTHOR}/report_engine
     build:
       context: ./application/report_engine
-    ports:
-      - 5004:5004
+    # ports:
+    #   - 5004:5004
     depends_on: 
       - mysql
     environment:
       DATABASE_URI: mysql+pymysql://root:password@mysql/MySQLDB
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 3
 
 
 # pass to the frontend
   report_ui:
-    image: report_ui
+    image: aso/report_ui
     build:
       context: ./application/report_ui
-    ports:
-      - 5000:5000
+    # ports:
+    #   - 5000:5000
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 3
 
 volumes: 
   db_reports:
