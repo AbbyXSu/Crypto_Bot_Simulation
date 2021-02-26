@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    image: abbysu/db:latest
+    image: abbysu/db
     build: ./db/
     environment:
       user: root
