@@ -21,8 +21,9 @@ pipeline{
         stage("Build & Push"){
             steps{
                 script{
-                    if (env.rollback == 'false'){
-                        sh "docker-compose build --parallel --build-arg APP_VERSION=${app_version} && docker-compose push"
+                    if (env.rollback == 'false')
+                        sh "docker-compose build --parallel --build-arg APP_VERSION=${app_version} && docker.withRegistry('https://registry.hub.docker.com', 
+                            'docker-hub-credentials')&& docker-compose push"
                         sh "docker system prune -af"
                         sh "bash jenkins/build_images.sh"
                     }    
