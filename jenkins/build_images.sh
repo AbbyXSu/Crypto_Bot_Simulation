@@ -1,5 +1,4 @@
 #!/bin/bash
-
 curl https://get.docker.com | sudo bash
 sudo apt install -y curl jq
 version=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')

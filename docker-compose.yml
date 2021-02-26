@@ -60,7 +60,7 @@ services:
   report_ui:
     image: ${AUTHOR}/report_ui
     build:
-      context: ./application/report_ui
+      context: ./application/report_UI
     ports:
       - 5000:5000
     restart: on-failure
