@@ -10,6 +10,6 @@ sudo chmod 666 /var/run/docker.sock
 
 docker-compose down --rmi all
 docker-compose build
-sudo docker login -u ${USERNAME} -p ${PASSWORD} https://registry.hub.docker.com
+sudo docker login -u ${USERNAME} -p ${PASSWORD} 
 sudo docker-compose push
 
