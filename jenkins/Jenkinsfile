@@ -24,11 +24,9 @@ pipeline {
                     if (env.rollback == 'false'){
                         withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                                sh "docker logout"
-                                sh "docker login -u ${USERNAME} -p ${PASSWORD} https://registry.hub.docker.com"
-                                sh "sudo -s"
-                                sh "docker-compose build --parallel --build-arg APP_VERSION=${env.app_version} && docker-compose push"
-                                sh 'docker system prune -af'
+                                // sh "sudo -s"
+                                // sh "docker-compose build --parallel --build-arg APP_VERSION=${env.app_version} && docker-compose push"
+                                // sh 'docker system prune -af'
                                 sh 'bash jenkins/build_images.sh'
                                 //app = docker.
                             }
