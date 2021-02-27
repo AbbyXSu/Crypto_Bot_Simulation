@@ -27,7 +27,7 @@ pipeline {
                                 sh "docker login -u ${USERNAME} -p ${PASSWORD} https://registry.hub.docker.com"
                                 sh "docker-compose build --parallel --build-arg APP_VERSION=${env.app_version} && docker-compose push"
                                 sh 'docker system prune -af'
-                                sh 'bash jenkins/build_images.sh'
+                                //sh 'bash jenkins/build_images.sh'
                             }
 
                         }
