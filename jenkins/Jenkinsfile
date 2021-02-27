@@ -29,9 +29,6 @@ pipeline {
                                 // sh 'docker system prune -af'
                                 sh 'bash jenkins/build_images.sh'
                                 //app = docker.
-                            }
-
-                        }
                     }
                 }
             }
@@ -55,5 +52,4 @@ pipeline {
             }
         }
     }
-
 }
