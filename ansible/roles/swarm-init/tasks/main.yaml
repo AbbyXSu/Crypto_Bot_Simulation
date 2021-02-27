@@ -8,5 +8,5 @@
 
 - name: Init a new swarm with default parameters
   community.general.docker_swarm:
-    state: present 
+  state: present 
   register: swarm_info
