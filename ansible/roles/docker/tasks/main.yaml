@@ -11,6 +11,8 @@
     - python-setuptools  
     state: latest
     update_cache: true
+    #  Make sure docker-py is uninstalled to make sure there complications with the python versioning and Ansbile
+
 - name: 'Add docker GPG apt key'
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
