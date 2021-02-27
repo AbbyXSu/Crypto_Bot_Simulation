@@ -14,4 +14,9 @@ docker-compose down --rmi all
 docker-compose build
 sudo docker login
 sudo docker push abbysu/revenue_service
+sudo docker push abbysu/db
+sudo docker push abbysu/expenditure_service
+sudo docker push abbysu/report_aggregate_service
+sudo docker push abbysu/report_engine
+sudo docker push ${AUTHOR}/report_ui
 
