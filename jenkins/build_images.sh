@@ -7,13 +7,14 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo usermod -aG docker $(whoami)
 sudo usermod -aG docker jenkins
 sudo chmod 666 /var/run/docker.sock
-export DATABASE_URI=${DATABASE_URI}
-export DB_PASSWORD=${DB_PASSWORD}
-export AUTHOR =${AUTHOR}
+
 
 
 docker-compose down --rmi all
 docker-compose build
 sudo docker login -u ${USERNAME} -p ${PASSWORD} 
+export DATABASE_URI=${DATABASE_URI}
+export DB_PASSWORD=${DB_PASSWORD}
+export AUTHOR =${AUTHOR}
 sudo docker-compose push
 
