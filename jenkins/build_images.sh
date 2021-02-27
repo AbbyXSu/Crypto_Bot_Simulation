@@ -13,5 +13,5 @@ sudo chmod 666 /var/run/docker.sock
 docker-compose down --rmi all
 docker-compose build
 sudo docker login
-sudo docker push -a
+sudo docker push abbysu/revenue_service
 
