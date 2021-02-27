@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any
     environment{
         DATABASE_URI = credentials("DATABASE_URI")
@@ -8,51 +8,48 @@ pipeline{
         rollback = 'false'
         replicas = 3
     }
-    stages{
-        stage("Testing"){
+    stages {
+        stage('Testing') {
             steps{
                 script{
                     if (env.rollback == 'false'){
-                        sh "bash jenkins/test.sh"   
-                    }   
+                        sh 'bash jenkins/test.sh'
+                    }
                 }
             }
         }
-        stage("Build & Push"){
-            steps{
-                script{
+        stage('Build & Push') {
+            steps {
+                script {
                     if (env.rollback == 'false'){
-                        sh "docker.withRegistry('https://registry.hub.docker.com','docker-hub-credentials')"
-                        sh "docker-compose build --parallel --build-arg APP_VERSION=${app_version} && docker-compose push"
-                        sh "docker system prune -af"
-                        sh "bash jenkins/build_images.sh"
-                    }    
+                        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                            sh "docker login -u ${$USERNAME} -p ${PASSWORD} https://registry.hub.docker.com"
+                            sh "docker-compose build --parallel --build-arg APP_VERSION=${env.app_version} && docker-compose push"
+                            sh 'docker system prune -af'
+                            sh 'bash jenkins/build_images.sh'
+                        }
+                    }
                 }
             }
         }
-        stage("Config Management (ansible)"){
-            steps{
+        stage('Config Management (ansible)') {
+            steps {
                 // write out playbook, inventory
                 // with roles
                 // ssh keys generated from jenkins machine for jenkins user (ssh-keygen)
                 // sudo su - jenkins, install ansible on this machine for jenkins
                 // jenkins runs playbook
-                sh "cd ansible && /home/jenkins/.local/bin/ansible-playbook -i inventory playbook.yaml"
+                sh 'cd ansible && /home/jenkins/.local/bin/ansible-playbook -i inventory playbook.yaml'
             }
         }
-        stage("Deploy"){
-            steps{
+        stage('Deploy') {
+            steps {
                 // copy docker-compose.yaml over ssh (scp command)
                 // set env variables on swarm manager
                 // ssh into swarm manager to deploy the stack
-                sh "bash jenkins/deploy.sh"
+                sh 'bash jenkins/deploy.sh'
             }
         }
     }
-    post {
-        always {
-            junit '**/junit.xml'
-            cobertura coberturaReportFile: '**/coverage.xml', failNoReports: false, failUnstable: false, onlyStable: false
-        }    
-    }
+
 }
