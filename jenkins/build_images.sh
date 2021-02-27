@@ -13,8 +13,5 @@ sudo chmod 666 /var/run/docker.sock
 docker-compose down --rmi all
 docker-compose build
 sudo docker login
-export DATABASE_URI = credentials("DATABASE_URI")
-export DB_PASSWORD = credentials("DB_PASSWORD")
-export AUTHOR= credentials("AUTHOR")
 sudo docker-compose push
 
