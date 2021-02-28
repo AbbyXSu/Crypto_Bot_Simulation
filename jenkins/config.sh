@@ -11,4 +11,4 @@ source ~/.bashrc
 # install ansible with pip
 pip3 install --user ansible
 cd ansible
-ansible-playbook -i inventory playbook.yaml
+ansible-playbook -i inventory.ini playbook.yaml
