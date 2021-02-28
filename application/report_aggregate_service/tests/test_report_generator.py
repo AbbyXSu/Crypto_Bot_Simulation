@@ -1,7 +1,6 @@
 from unittest.mock import patch
 from flask import url_for 
 from flask import Flask
-from sqlalchemy.sql.expression import null
 from flask_testing import TestCase
 from  ..report_generator import app
 
