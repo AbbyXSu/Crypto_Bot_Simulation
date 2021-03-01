@@ -20,8 +20,8 @@ services:
     build:
       context: ./application/revenue_service
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 5
 
   # Retrieves the expense
   expenditure_service:
@@ -29,8 +29,8 @@ services:
     build:
       context: ./application/expenditure_service
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 5
 
   # Generates a report_aggregate_service
   report_aggregate_service:
@@ -38,8 +38,8 @@ services:
     build:
       context: ./application/report_aggregate_service
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 5
 
 
 # process the engine
@@ -52,8 +52,8 @@ services:
     environment:
       DATABASE_URI: ${DATABASE_URI}
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 5
 
 
 # pass to the frontend
@@ -64,8 +64,8 @@ services:
     ports:
       - 5000:5000
     restart: on-failure
-    # deploy:
-    #   replicas: 3
+    deploy:
+      replicas: 5
 
 volumes: 
   db_reports:
