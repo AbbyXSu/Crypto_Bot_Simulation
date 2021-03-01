@@ -35,7 +35,24 @@ However, it is assessed that the seperation between frontend and backend is an b
 
 ![UI and backend](https://user-images.githubusercontent.com/77119427/109568202-7d648480-7ade-11eb-8b63-b759aad0af92.PNG)
 
+### Database Structure 
 
+![database structure](https://user-images.githubusercontent.com/77119427/109569062-bc470a00-7adf-11eb-806f-379bbaec9ad4.PNG)
+MYSQL database is used in this application, database is created, containerised and deployed through Docker containerisation along with all other services via docker compose. The database is prepopulated to ensure the table is established and connected to the API. MYSQL workbench is used during development stage to ensure the smooth procedures of data presistence and database management. 
 
+### Project Tracking
+Github Project board was the chosen method when planning the project and tracking the progress of tasks set out. This was done to ensure a steady workflow and create an agile methodology where changes could be made through the production of the web app. This was necessary to allow for an agile workflow ensuring smaller tasks were being completed and this allowed for a structured approach when tackling the project. Below is the project board used for this project:
+![project board](https://user-images.githubusercontent.com/77119427/109570077-6a06e880-7ae1-11eb-8542-d51ecd631807.PNG)
 
- 
+### Two Interpretations of the Application
+
+Version 1 :
+![version 1 UI](https://user-images.githubusercontent.com/77119427/109570416-e699c700-7ae1-11eb-83d1-340e486ecb9f.PNG)
+
+Version 2 :
+![Version 2 rolling update](https://user-images.githubusercontent.com/77119427/109542405-eb984f80-7abc-11eb-9f59-7ea47b82ab37.PNG)
+
+Two versions of the application is created in order to demonstarte an rolling update using docker swarm and achieving A/B deployment with zero downtime.
+
+## Technologies and CI/CD Pipeline
+![pipline](https://user-images.githubusercontent.com/77119427/109572022-6fb1fd80-7ae4-11eb-95d2-cc7322196c10.PNG)
