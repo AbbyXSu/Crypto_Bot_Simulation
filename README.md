@@ -1,3 +1,10 @@
-# Financial_report_generator
-This project creates a service-orientated Microservices architecture for the application, financial report generator is achieved via feature technology including AWS Lambda, CI/CD pipeline on Jenkins , Ansible, AWS EC2, Docker Swarm , NGINX
-![ERD](https://user-images.githubusercontent.com/77119427/108291745-9f7b1000-718a-11eb-8b31-1be9071bcacb.PNG)
+# Financial Report Generator - A SOA Application
+
+Resource: 
+
+Link to Github project board: https://github.com/AbbyXSu/Financial_report_generator/projects/1
+
+## Requirement and Specification
+It is required that an application should be developed using an service-orientated architecture design  
+
+ 
