@@ -16,35 +16,35 @@ services:
 
   # Retrieves the revenue
   revenue_service:
-    image: ${AUTHOR}/revenue_service
+    image: ${AUTHOR}/revenue_service:v2
     build:
       context: ./application/revenue_service
     restart: on-failure
     deploy:
-      replicas: 3
+      replicas: 5
 
   # Retrieves the expense
   expenditure_service:
-    image:  ${AUTHOR}/expenditure_service
+    image:  ${AUTHOR}/expenditure_service:v2
     build:
       context: ./application/expenditure_service
     restart: on-failure
     deploy:
-      replicas: 3
+      replicas: 5
 
   # Generates a report_aggregate_service
   report_aggregate_service:
-    image: ${AUTHOR}/report_aggregate_service
+    image: ${AUTHOR}/report_aggregate_service:v2
     build:
       context: ./application/report_aggregate_service
     restart: on-failure
     deploy:
-      replicas: 3
+      replicas: 5
 
 
 # process the engine
   report_engine:
-    image: ${AUTHOR}/report_engine
+    image: ${AUTHOR}/report_engine:v2
     build:
       context: ./application/report_engine
     depends_on: 
@@ -53,19 +53,19 @@ services:
       DATABASE_URI: ${DATABASE_URI}
     restart: on-failure
     deploy:
-      replicas: 3
+      replicas: 5
 
 
 # pass to the frontend
   report_ui:
-    image: ${AUTHOR}/report_ui
+    image: ${AUTHOR}/report_ui:v2
     build:
       context: ./application/report_UI
     ports:
       - 5000:5000
     restart: on-failure
     deploy:
-      replicas: 3
+      replicas: 5
 
 volumes: 
   db_reports:
