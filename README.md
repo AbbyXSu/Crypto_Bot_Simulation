@@ -4,6 +4,11 @@ Resource:
 
 Link to Github project board: https://github.com/AbbyXSu/Financial_report_generator/projects/1
 
+Success Jenkins Build documentation of the 1st version of the application:https://github.com/AbbyXSu/Financial_report_generator/issues/16#issuecomment-788729676
+
+Success Jenkins Build documentation of the 2nd version of the application : https://github.com/AbbyXSu/Financial_report_generator/issues/16#issuecomment-788729759
+
+
 ## Requirement and Specification
 It is required that an application should be developed using an service-orientated architecture (SOA) design and using following feature technologies: 
 
