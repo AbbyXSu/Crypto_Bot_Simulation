@@ -120,6 +120,6 @@ Overall, this project was successful in creating a service-orientated architectu
 - Internal reverse proxy should be set up for internal developers and users in order to keep pirate company assets seperated from public domain.
 
 ## Acknowledgements 
-QA Academy for the teaching and support so I can carry out this project successfully. My dearest friends and family who inspired and supported me throughout the project.
+QA Academy for the teaching and support so I can carry out this project successfully. Special thanks to Ben Hesketh, Jay Grindrod, Nathan Forester, Peter Rhodes and Raji Kolluru for the support, encouragement and supervision through out the project.They are such a amazing team and I have learnt so much from them.
 ## Author
 Abby X Su
