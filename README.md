@@ -4,9 +4,9 @@ Resource:
 
 Link to Github project board: https://github.com/AbbyXSu/Financial_report_generator/projects/1
 
-Success Jenkins Build documentation of the 1st version of the application:https://github.com/AbbyXSu/Financial_report_generator/issues/16#issuecomment-788729676
+Successful Jenkins Build documentation of the 1st version of the application:https://github.com/AbbyXSu/Financial_report_generator/issues/16#issuecomment-788729676
 
-Success Jenkins Build documentation of the 2nd version of the application : https://github.com/AbbyXSu/Financial_report_generator/issues/16#issuecomment-788729759
+Successful Jenkins Build documentation of the 2nd version of the application : https://github.com/AbbyXSu/Financial_report_generator/issues/16#issuecomment-788729759
 
 
 ## Requirement and Specification
@@ -86,12 +86,26 @@ Environment Variables were set for the project and therefore stores as credentia
 
 ![v1 docker service ls](https://user-images.githubusercontent.com/77119427/109540524-7c216080-7aba-11eb-9098-e72903a0ff6a.PNG)
 ### Docker Swarm via Docker and Docker Compose
+Docker runs a lightweight version of Linux, which does not include the compilers necessary to compile the underlying C/Fortran libraries. in order to install the package, first these dependancies should be installed via Dockerfile. The advantage of using docker and docker compose here is, the images is compiled, customised and thereafter push to the docker hub for deployment. For deployment, the images can be easily pulled and deployed to multiple machine without any complication or further individual compiling of the VMs. therefore increased the efficiency of the CI/CD process.
+
+![Matplotlib with docker](https://user-images.githubusercontent.com/77119427/109622634-3bfec400-7b34-11eb-9e1f-a28b99f969d5.PNG)
 
 ### NGINX the reverse Proxy 
+A proxy server is a go‑between or intermediary server that forwards requests for content from multiple clients to different servers across the Internet. A reverse proxy server is a type of proxy server that typically sits behind the firewall in a private network and directs client requests to the appropriate backend server. A reverse proxy like NGINX provides an additional level of abstraction and control to ensure the smooth flow of network traffic between clients and servers.
+The NGINX in this application has act as a “traffic cop,” sitting in front of your backend servers and distributing client requests across a group of servers in a manner that maximizes speed and capacity utilization by achieving Load balancing .
+
+It also act as a security API gateway as it ensures that multiple servers can be accessed from a single record locator or URL regardless of the structure of backend network.
 
 ## Risk Assessment
 
 ## Further Improvement 
+Overall, this project was successful in creating a service-orientated architecture for my application. However, there are a few improvements that I would like to implement:
+- An actual microservice architect should be implemented should there be further development of the application
+- A more  asthetically pleasing UI using CSS and bootstrap
+- scale up the Docker Swarm to provide higher redundancy and availability
+- More elements of the accounting ratios can be introduced for a more comprehensive financail performance report.
+- Internal reverse proxy should be set up for internal developers and users in order to keep pirate company assets seperated from public domain.
+
 ## Acknowledgements 
 QA Academy for the teaching and support so I can carry out this project successfully. My dearest friends and family who inspired and supported me throughout the project.
 ## Author
