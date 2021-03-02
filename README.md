@@ -19,6 +19,18 @@ It is required that an application should be developed using an service-orientat
 - Ansible as an  provisioning, configuration management, and application-deployment tool enabling infrastructure as code, Anisble playbook and inventory is created for setting up and configurating the deployment environment
 - NGINX is used as a reverse proxy and load balance for the application
 
+Technologies used to achieve the requirements:
+
+- Kanban Board: Github Project Board
+- Version Control: Git
+- CI/CD Server: Jenkins
+- Configuration Management: Ansible
+- Cloud server: GCP virtual machines
+- Containerisation: Docker and Docker Compose
+- Orchestration Tool: Docker Swarm
+- Reverse Proxy: NGINX
+- Python programming and Bash scripting 
+
 ## My Approach 
 
 There are two versions of the application, the initial application contain simpler business logic and tha later one contain more vivid graph to demonstarte the trend of financial performance over time.
