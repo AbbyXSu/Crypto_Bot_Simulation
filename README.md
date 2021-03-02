@@ -50,5 +50,45 @@ Github Project board was the chosen method when planning the project and trackin
 
 Second versions of the application is created in order to demonstarte an rolling update using docker swarm and achieving A/B deployment with zero downtime.
 
-## Technologies and CI/CD Pipeline
+## Feature Technologies and CI/CD Pipeline
 ![pipline](https://user-images.githubusercontent.com/77119427/109572022-6fb1fd80-7ae4-11eb-95d2-cc7322196c10.PNG)
+
+### Webhook trigger Jenkins builds
+![webhooks gitpush on jenkins](https://user-images.githubusercontent.com/77119427/109613390-fab4e700-7b28-11eb-83bc-b413ede3600e.PNG)
+
+![webhook github](https://user-images.githubusercontent.com/77119427/109613362-f092e880-7b28-11eb-91f5-47fd3743ad27.PNG)
+
+A webhook is a mechanism to automatically trigger the build of a Jenkins project upon a commit pushed in a Git repository.
+In order for builds to be triggered automatically by push and pull request events, a Jenkins Web Hook needs to be added to the GitHub repository. 
+An webhook triggered build event will be recorded on build status at the start of the build and Github will also recored the delivery status of the push triggered delivery event on their webhook records(As demonstrate above).
+
+### CI/CD pipeline 
+![version 2 jenkins](https://user-images.githubusercontent.com/77119427/109614441-8e3ae780-7b2a-11eb-9844-fb220ffc2b5a.PNG)
+
+The above records shows the status of the Jenkins CI/CD-pipiline builds. The build status indicate if the build is successful or failed with tracking logs detaillig the issues and actions during the build.
+
+Environment Variables were set for the project and therefore stores as credentials on jenkins. Credentials such as Docker Hub login, Database URI, Database password and author is maneged under Jenkins's Credentials/Secret management. There are many benefits in setting up Environment Variables,The major benefits of using environment variables are:Environment Variables can provide better security without leaving foorprint of your credentials on the source code, it also provide easy configuration for development where configuration and tools used could be everchanging.
+
+**First stage -Testing:** Pytest and mock testing is used to perform unittesting, all tests has passed and reached above 90% coverage.   
+
+**Second stage - Build and Push Docker images:** After successful testing of the codes, Jenkins will therefore automatically move to build and push docker images via executing the docker-compose file and build images for each services based on their Dockerfile specification. This step is crucial for any update or development of the services as customised images would be built and push to the Docker Hub for the use of later deployment.
+
+**Third stage - Ansible configuration:** on the third stage, Jenkins will trigger Ansible configuration to build by executing ansible playbook.yml and inventory.ini. The purpose of the Ansible automate configuration in this project is to connect with the other VMs on the GCP, install and start docker, configuring NGINX, to initialise Docker Swarm manager and to finally join the swarm worker node with the manager node. All the set up of the deployment environment will eventually contribute to the success of the deployment.
+
+![swarm v1](https://user-images.githubusercontent.com/77119427/109540846-f225c780-7aba-11eb-8f9d-64fd7c005126.PNG)
+
+**Last stage - Deployment via Docker Stack Deploy:** The application will be deployed as a stack across docker swarm via the docker manager. I have introduce 5 replicas for version2 and 3 replica for version 1 of the application. More replicas of the service containers introduce more redundency and overhead to the application where requests from the client will be handled without delay. It will also minimise the level of affect if one of the container shutdown or went corrupted.
+
+![v1 docker service ls](https://user-images.githubusercontent.com/77119427/109540524-7c216080-7aba-11eb-9098-e72903a0ff6a.PNG)
+### Docker Swarm via Docker and Docker Compose
+
+### NGINX the reverse Proxy 
+
+## Risk Assessment
+
+## Further Improvement 
+## Acknowledgements 
+QA Academy for the teaching and support so I can carry out this project successfully. My dearest friends and family who inspired and supported me throughout the project.
+## Author
+
+Abby X Su
