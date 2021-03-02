@@ -86,7 +86,7 @@ Environment Variables were set for the project and therefore stores as credentia
 
 ![v1 docker service ls](https://user-images.githubusercontent.com/77119427/109540524-7c216080-7aba-11eb-9098-e72903a0ff6a.PNG)
 ### Docker Swarm via Docker and Docker Compose
-Docker runs a lightweight version of Linux, which does not include the compilers necessary to compile the underlying C/Fortran libraries. in order to install the package, first these dependancies should be installed via Dockerfile. The advantage of using docker and docker compose here is, the images is compiled, customised and thereafter push to the docker hub for deployment. For deployment, the images can be easily pulled and deployed to multiple machine without any complication or further individual compiling of the VMs. therefore increased the efficiency of the CI/CD process.
+Docker runs a lightweight version of Linux, which does not include the compilers necessary to compile the underlying C/Fortran libraries. in order to install the package Matplotlib for the 2nd version of the application, first these dependancies should be installed via Dockerfile. The advantage of using docker and docker compose for Matplotlib in the service is, the images is compiled, customised and thereafter push to the docker hub for deployment. For deployment, the images can be easily pulled and deployed to multiple machine without any complication or further individual compiling of the VMs. therefore increased the efficiency of the CI/CD process.
 
 ![Matplotlib with docker](https://user-images.githubusercontent.com/77119427/109622634-3bfec400-7b34-11eb-9e1f-a28b99f969d5.PNG)
 
@@ -97,6 +97,7 @@ The NGINX in this application has act as a “traffic cop,” sitting in front o
 It also act as a security API gateway as it ensures that multiple servers can be accessed from a single record locator or URL regardless of the structure of backend network.
 
 ## Risk Assessment
+![risk assess](https://user-images.githubusercontent.com/77119427/109629366-a6673280-7b3b-11eb-9005-27db281256f6.PNG)
 
 ## Further Improvement 
 Overall, this project was successful in creating a service-orientated architecture for my application. However, there are a few improvements that I would like to implement:
@@ -109,5 +110,4 @@ Overall, this project was successful in creating a service-orientated architectu
 ## Acknowledgements 
 QA Academy for the teaching and support so I can carry out this project successfully. My dearest friends and family who inspired and supported me throughout the project.
 ## Author
-
 Abby X Su
